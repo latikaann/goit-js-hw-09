@@ -12,20 +12,19 @@ refs.stopButton.addEventListener('click', onStopButtonClick);
 
 let timerId = null;
 const DELAY = 1000;
-isActive = true;
+refs.stopButton.disabled = true;
 
 function onStartButtonClick(e) {
-  console.log(e.target);
-  if (this.isActive) {
-    return;
-  }
   timerId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, DELAY);
-  this.isActive = true;
+
+  refs.startButton.disabled = true;
+  refs.stopButton.disabled = false;
 }
 
-// setInterval(onStartButtonClick, DELAY);
-function onStopButtonClick(e) {
+function onStopButtonClick() {
   clearInterval(timerId);
+  refs.startButton.disabled = false;
+  refs.stopButton.disabled = true;
 }
