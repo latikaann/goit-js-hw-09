@@ -32,6 +32,7 @@ flatpickr(input, {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     if (new Date() > selectedDates[0]) {
+      button.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       button.disabled = false;
