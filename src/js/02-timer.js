@@ -36,6 +36,7 @@ flatpickr(input, {
       button.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future');
       clearInterval(timerId);
+      timerToZero();
     } else {
       button.disabled = false;
     }
@@ -45,11 +46,8 @@ flatpickr(input, {
 function onButtonClick(e) {
   timerId = setInterval(() => {
     const currentTime = Date.now();
-
     const deltaTime = new Date(input.value) - currentTime;
-
     const timeComponents = convertMs(deltaTime);
-
     updateTimer(timeComponents);
   }, 1000);
 }
@@ -77,13 +75,16 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-
 function updateTimer({ days, hours, minutes, seconds }) {
   timerDays.textContent = addLeadingZero(`${days}`);
   timerHours.textContent = addLeadingZero(`${hours}`);
   timerMinutes.textContent = addLeadingZero(`${minutes}`);
   timerSeconds.textContent = addLeadingZero(`${seconds}`);
+}
+
+function timerToZero() {
+  timerDays.textContent = '00';
+  timerHours.textContent = '00';
+  timerMinutes.textContent = '00';
+  timerSeconds.textContent = '00';
 }
