@@ -49,6 +49,9 @@ function onButtonClick(e) {
     const deltaTime = new Date(input.value) - currentTime;
     const timeComponents = convertMs(deltaTime);
     updateTimer(timeComponents);
+    if (deltaTime <= 1000) {
+      clearInterval(timerId);
+    }
   }, 1000);
 }
 
