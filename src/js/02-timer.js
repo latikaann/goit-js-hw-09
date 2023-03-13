@@ -21,6 +21,7 @@ const { input, button, timerDays, timerHours, timerMinutes, timerSeconds } =
   refs;
 
 button.disabled = true;
+let timerId = null;
 
 button.addEventListener('click', onButtonClick);
 
@@ -34,6 +35,7 @@ flatpickr(input, {
     if (new Date() > selectedDates[0]) {
       button.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future');
+      clearInterval(timerId);
     } else {
       button.disabled = false;
     }
@@ -41,7 +43,7 @@ flatpickr(input, {
 });
 
 function onButtonClick(e) {
-  setInterval(() => {
+  timerId = setInterval(() => {
     const currentTime = Date.now();
 
     const deltaTime = new Date(input.value) - currentTime;
