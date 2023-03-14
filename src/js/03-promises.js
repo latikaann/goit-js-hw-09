@@ -13,6 +13,20 @@ const { form, firstDelay, stepDelay, amount } = refs;
 
 form.addEventListener('submit', onSubmitForm);
 
+function createPromise(position, delay) {
+  return new Promise((resolve, reject) => {
+    const shouldResolve = Math.random() > 0.3;
+
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve({ position, delay });
+      } else {
+        reject({ position, delay });
+      }
+    }, delay);
+  });
+}
+
 function onSubmitForm(e) {
   e.preventDefault();
   // console.log(e.target);
@@ -32,18 +46,4 @@ function onSubmitForm(e) {
         );
       });
   }
-}
-
-function createPromise(position, delay) {
-  return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
-
-    setTimeout(() => {
-      if (shouldResolve) {
-        resolve({ position, delay });
-      } else {
-        reject({ position, delay });
-      }
-    }, delay);
-  });
 }
