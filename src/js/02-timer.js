@@ -53,6 +53,7 @@ function onButtonClick(e) {
       clearInterval(timerId);
     }
   }, 1000);
+  button.disabled = true;
 }
 
 function convertMs(ms) {

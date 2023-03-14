@@ -46,4 +46,5 @@ function onSubmitForm(e) {
         );
       });
   }
+  e.currentTarget.reset();
 }
